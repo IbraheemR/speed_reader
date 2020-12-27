@@ -1,30 +1,50 @@
+
 <script lang="ts">
-	export let name: string;
+	import LineView from "./components/LineView.svelte";
+import TimeView from "./components/TimeView.svelte";
+import WpmView from "./components/WPMView.svelte";
+	import Controller, { State } from "./controller/Controller";
+
+	export let controller: Controller;
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<div class="line">
+		<LineView {controller}></LineView>
+	</div>
+	<div class="time" class:grey={$controller.state !== State.FINISHED}>
+		<TimeView {controller}></TimeView>
+	</div>
+	<div class="wpm" class:grey={$controller.state !== State.FINISHED}>
+		<WpmView {controller}></WpmView>
+	</div>
+
 </main>
 
 <style>
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+		height: 100%;
+
+		display: grid;
+		grid-template-areas: "line line" "time wpm";
+		grid-template-rows: 1fr auto;
+		align-items: center;
+		gap: 5rem;
 	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	.line {
+		grid-area: line;
 	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	.time {
+		grid-area: time;
+	}
+
+	.wpm {
+		grid-area: wpm;
+	}
+
+	.grey {
+		color: var(--theme-mid);
 	}
 </style>
