@@ -1,35 +1,32 @@
-
 <script lang="ts">
-	import LineView from "./components/LineView.svelte";
-import TimeView from "./components/TimeView.svelte";
-import WpmView from "./components/WPMView.svelte";
+	import { onMount } from "svelte";
+
+	import LineView from "./components/views/LineView.svelte";
+	import SetupButton from "./components/views/setup/SetupButton.svelte";
+	import SetupScreen from "./components/views/setup/SetupScreen.svelte";
+	import TimeView from "./components/views/TimeView.svelte";
+	import WpmView from "./components/views/WPMView.svelte";
 	import Controller, { State } from "./controller/Controller";
 
-	export let controller: Controller;
+	let controller: Controller = new Controller([]); // FIXME: dumb hack but it work for now. Empyt controller allows ui to populate until proper one is ready. in reality need to do checks for the controller
+
+	let toggleSetup;
+
+	$: if (toggleSetup) toggleSetup(); // Open config screen to set initial words
 </script>
 
-<main>
-	<div class="line">
-		<LineView {controller}></LineView>
-	</div>
-	<div class="time" class:grey={$controller.state !== State.FINISHED}>
-		<TimeView {controller}></TimeView>
-	</div>
-	<div class="wpm" class:grey={$controller.state !== State.FINISHED}>
-		<WpmView {controller}></WpmView>
-	</div>
-
-</main>
-
 <style>
-	main {
+	#main {
 		height: 100%;
 
 		display: grid;
-		grid-template-areas: "line line" "time wpm";
+		grid-template-areas: "line line line" "time wpm setup";
 		grid-template-rows: 1fr auto;
+		grid-template-columns: 1fr 1fr auto;
 		align-items: center;
 		gap: 5rem;
+
+		padding: 5rem;
 	}
 
 	.line {
@@ -43,8 +40,29 @@ import WpmView from "./components/WPMView.svelte";
 	.wpm {
 		grid-area: wpm;
 	}
+	.setup {
+		grid-area: setup;
+	}
 
 	.grey {
-		color: var(--theme-mid);
+		--theme-fg: var(--theme-mid);
 	}
 </style>
+
+<section id="main">
+	<div class="line">
+		<LineView {controller} />
+	</div>
+	<div class="time" class:grey={$controller.state !== State.FINISHED}>
+		<TimeView {controller} />
+	</div>
+	<div class="wpm" class:grey={$controller.state !== State.FINISHED}>
+		<WpmView {controller} />
+	</div>
+
+	<div class="setup">
+		<SetupButton callback={toggleSetup} />
+	</div>
+</section>
+
+<SetupScreen bind:toggle={toggleSetup} bind:controller />

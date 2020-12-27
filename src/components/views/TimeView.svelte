@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type Controller from "../controller/Controller";
+    import type Controller from "../../controller/Controller";
 
 
     export let controller: Controller;

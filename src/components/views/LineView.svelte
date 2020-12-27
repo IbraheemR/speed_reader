@@ -1,5 +1,5 @@
 <script lang="ts">
-import Controller, { State } from "../controller/Controller";
+import Controller, { State } from "../../controller/Controller";
 export let controller: Controller;
 
 let grey = false;

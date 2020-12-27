@@ -38,12 +38,11 @@ export default class Controller {
           this.currentIndex++;
         } else {
           this.state = State.FINISHED;
-          this.onPlayerInput();
+          this.onFinish();
         }
         break;
 
       case State.FINISHED:
-        this.onFinish();
         break;
     }
 
