@@ -45,7 +45,7 @@
 	}
 
 	.grey {
-		--theme-fg: var(--theme-mid);
+		color: var(--theme-mid);
 	}
 </style>
 
