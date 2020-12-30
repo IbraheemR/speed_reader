@@ -58,14 +58,15 @@
 	<div class="line">
 		<LineView {controller} />
 	</div>
+
+	<div class="progress" class:grey={$controller.state !== State.FINISHED}>
+		<ProgressView {controller} />
+	</div>
 	<div class="time" class:grey={$controller.state !== State.FINISHED}>
 		<TimeView {controller} />
 	</div>
 	<div class="wpm" class:grey={$controller.state !== State.FINISHED}>
 		<WpmView {controller} />
-	</div>
-	<div class="progress" class:grey={$controller.state !== State.FINISHED}>
-		<ProgressView {controller} />
 	</div>
 
 	<div class="setup">
