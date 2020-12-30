@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 
 	import LineView from "./components/views/LineView.svelte";
+	import ProgressView from "./components/views/ProgressView.svelte";
 	import SetupButton from "./components/views/setup/SetupButton.svelte";
 	import SetupScreen from "./components/views/setup/SetupScreen.svelte";
 	import TimeView from "./components/views/TimeView.svelte";
@@ -20,9 +21,9 @@
 		height: 100%;
 
 		display: grid;
-		grid-template-areas: "line line line" "time wpm setup";
+		grid-template-areas: "line line line line" "progress time wpm setup";
 		grid-template-rows: 1fr auto;
-		grid-template-columns: 1fr 1fr auto;
+		grid-template-columns: 1fr 1fr 1fr auto;
 		align-items: center;
 		gap: 5rem;
 
@@ -39,6 +40,10 @@
 
 	.wpm {
 		grid-area: wpm;
+	}
+	.progress {
+		grid-area: progress;
+		justify-self: end;
 	}
 	.setup {
 		grid-area: setup;
@@ -58,6 +63,9 @@
 	</div>
 	<div class="wpm" class:grey={$controller.state !== State.FINISHED}>
 		<WpmView {controller} />
+	</div>
+	<div class="progress" class:grey={$controller.state !== State.FINISHED}>
+		<ProgressView {controller} />
 	</div>
 
 	<div class="setup">
