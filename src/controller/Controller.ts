@@ -6,6 +6,7 @@ export default class Controller {
   startTimestamp: number;
   finishTimestamp: number;
   wpmHistory: number[] = [];
+  totalWords = 0;
 
   state = State.READY;
 
@@ -58,6 +59,9 @@ export default class Controller {
     if (this.lastLineTimestamp) {
       let diff = now - this.lastLineTimestamp;
       let words = this.currentLine.split(" ").length;
+
+      this.totalWords += words;
+
       let wpm = words / (diff / 1000 / 60);
 
       this.wpmHistory.push(wpm);
@@ -70,11 +74,21 @@ export default class Controller {
     this.finishTimestamp = Date.now();
   }
 
+  get prevLine() {
+    return this.words[this.currentIndex - 1];
+  }
   get currentLine() {
     return this.words[this.currentIndex];
   }
+  get nextLine() {
+    return this.words[this.currentIndex + 1];
+  }
   get lastWpm() {
     return this.wpmHistory[this.wpmHistory.length - 1];
+  }
+  get totalWpm() {
+    let wpm = this.totalWords / ((this.finishTimestamp ?? Date.now()) - this.startTimestamp) * 1000 * 60
+    return Number.isNaN(wpm) ? undefined : wpm;
   }
 }
 

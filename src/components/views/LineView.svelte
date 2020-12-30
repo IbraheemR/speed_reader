@@ -1,31 +1,28 @@
 <script lang="ts">
-import Controller, { State } from "../../controller/Controller";
-export let controller: Controller;
+    import Controller, { State } from "../../controller/Controller";
+    export let controller: Controller;
 
-let grey = false;
-
+    let grey = false;
 </script>
-
-
-<div class:grey={$controller.state !== State.IN_PROGRESS}>
-{#if controller.state === State.READY}
-    Press space to start
-{:else if  controller.state === State.IN_PROGRESS}
-    {$controller.currentLine}
-{:else}
-    Done
-{/if}
-</div>
 
 <style>
     div {
-        font-size: 2rem;
-        text-align: center;
+        font-size: 1.5rem;
 
-        padding: 2rem;
+        padding: 0 0 0 30rem;
     }
 
-    div.grey {
+    .grey {
         color: rgb(56, 56, 55);
     }
 </style>
+
+<div class:grey={$controller.state !== State.IN_PROGRESS}>
+    {#if controller.state === State.READY}
+        Press space to start
+    {:else if controller.state === State.IN_PROGRESS}
+        <span class="grey">{$controller.prevLine ?? ''}</span><br />
+        {$controller.currentLine}<br />
+        <!-- <span class="grey">{$controller.nextLine ?? ''}</span> -->
+    {:else}Done{/if}
+</div>

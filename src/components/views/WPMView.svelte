@@ -1,32 +1,10 @@
 <script lang="ts">
     import type Controller from "../../controller/Controller";
 
-
     export let controller: Controller;
     // TODO: abstracts to a stats cotroller? or maybe util functions are sufficient
     // TODO: Graph?
 </script>
-
-
-
-<section>
-    <div class="title">WPM</div>
-    <div class="avg stat">
-        {#if $controller.wpmHistory.length > 0}
-            {(
-                $controller.wpmHistory
-                .reduce((a, b) => a + b)
-                /$controller.wpmHistory.length
-            ).toFixed(2)}
-        {:else}
-            N/A
-        {/if}
-</div>
-    <div class="avg label"> avg</div> 
-    <div class="last stat">{$controller.lastWpm?.toFixed(2) ?? "N/A"}</div>
-    <div class="last label">last</div>
-
-</section>
 
 <style>
     section {
@@ -59,7 +37,6 @@
     .avg.stat {
         grid-area: avg;
         text-align: right;
-
     }
 
     .avg.label {
@@ -75,3 +52,11 @@
         grid-area: lastlabel;
     }
 </style>
+
+<section>
+    <div class="title">WPM</div>
+    <div class="avg stat">{$controller.totalWpm?.toFixed(2) || 'N/A'}</div>
+    <div class="avg label">total</div>
+    <div class="last stat">{$controller.lastWpm?.toFixed(2) || 'N/A'}</div>
+    <div class="last label">last</div>
+</section>
