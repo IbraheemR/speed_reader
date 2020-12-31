@@ -28,10 +28,12 @@
 
 <div class="main" class:grey={$controller.state !== State.IN_PROGRESS}>
     {#if controller.state === State.READY}
-        Press space to start
+        <div>Press space to start</div>
     {:else if controller.state === State.IN_PROGRESS}
         <div class="grey">{$controller.prevLine ?? ''}</div>
         <div>{$controller.currentLine}</div>
         <div class="grey">{$controller.nextLine ?? ''}</div>
-    {:else}Done{/if}
+    {:else}
+        <div>Done</div>
+    {/if}
 </div>
