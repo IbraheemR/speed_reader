@@ -11,12 +11,7 @@
     function submit() {
         shown = false;
 
-        controller = new Controller(
-            text
-                .split("\n")
-                .map((x) => x.trim())
-                .filter((x) => x)
-        );
+        controller = new Controller(text.split(/\n+/));
     }
 
     let text = "";

@@ -32,6 +32,8 @@
 
 	.line {
 		grid-area: line;
+
+		height: 100%;
 	}
 
 	.time {
