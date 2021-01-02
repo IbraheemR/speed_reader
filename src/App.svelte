@@ -23,11 +23,11 @@
 		display: grid;
 		grid-template-areas: "line line line line" "progress time wpm setup";
 		grid-template-rows: 1fr auto;
-		grid-template-columns: 1fr 1fr 1fr auto;
+		grid-template-columns: auto 1fr 1fr auto;
 		align-items: center;
 		gap: 5rem;
 
-		padding: 5rem;
+		padding: 5rem 20vw;
 	}
 
 	.line {
@@ -45,10 +45,10 @@
 	}
 	.progress {
 		grid-area: progress;
-		justify-self: end;
 	}
 	.setup {
 		grid-area: setup;
+		justify-self: end;
 	}
 
 	.grey {

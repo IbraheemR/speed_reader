@@ -79,11 +79,13 @@ button:focus {
 }
 
 
-svg.button {
+.button {
+  color: var(--theme-mid);
   fill: var(--theme-mid);
   cursor: pointer;
 }
 
-svg.button:hover {
+.button:hover {
+  color: var(--theme-fg);
   fill: var(--theme-fg);
 }
