@@ -26,15 +26,16 @@
     }
 
     .main .currentline::before {
+        /* Using em not rem so dot scales with changing parent font size */
         content: " ";
         position: absolute;
-        left: -1rem;
-        top: 0.4rem;
+        left: -1em;
+        top: 0.1em;
 
         background-color: red;
 
-        width: 0.5rem;
-        height: 0.5rem;
+        width: 0.8em;
+        height: 0.8em;
 
         border-radius: 50%;
     }
